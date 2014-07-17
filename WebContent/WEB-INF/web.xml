@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
-	<display-name>CalltoReSTService.rest</display-name>
+	<display-name>CalltoReSTService</display-name>
 	<welcome-file-list>
 		<welcome-file>readme.html</welcome-file>
 		<welcome-file>index.html</welcome-file>
@@ -19,7 +19,7 @@
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 		<init-param>
 			<param-name>com.sun.jersey.config.property.packages</param-name>
-			<param-value>com.calltoservice</param-value>
+			<param-value>com.calltoservice.servlet</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
@@ -27,4 +27,11 @@
 		<servlet-name>com.calltoservice.servlet</servlet-name>
 		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
+
+	<resource-ref>
+		<description>MySQL Datasource</description>
+		<res-ref-name>jdbc/dbdemo</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
 </web-app>
