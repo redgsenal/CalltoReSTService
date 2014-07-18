@@ -3,15 +3,27 @@ package com.calltoservice.database;
 import java.sql.SQLException;
 
 import javax.annotation.Resource;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
-import com.mysql.jdbc.Connection;
 
 public final class ServiceDBConn {
 
-	@Resource(name="jdbc/dbdemo")
-	private static DataSource ds;
+	@Resource(name="dbdemo")
+	private DataSource ds;
 	
-	public static final Connection getConn() throws SQLException{
-		return (Connection) ds.getConnection();		
+	public ServiceDBConn() {
+		try {
+			Context ctx = new InitialContext();
+			ds = (DataSource)ctx.lookup("java:comp/env/jdbc/dbdemo");
+		  } catch (NamingException e) {
+			e.printStackTrace();
+		  }
+		
+	}
+	
+	public java.sql.Connection getConn() throws SQLException{
+		return ds.getConnection();
 	}
 }
